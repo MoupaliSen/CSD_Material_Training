@@ -1,0 +1,149 @@
+<---Script for Featured News CAS Project --->
+
+//OverView of Project//
+
+This is a java selenium project automate to Be.Cognizant Website.It includes TestNG,Page Object Model to make the project and use Apache POI for data-driven testing to create Excel file.It includes extentReportManager for generating the test report.
+
+I have made my project using hybrid automation framework(java,selenium,TestNG,Maven ,Page object model)
+
+At first I create a Maven Project then add all dependencies.The dependencies are Selenium java,Apache poi,extentreports
+
+After that I have created a folder structure in the way where I have included 4 packages -- pageObjects,testBase,testCases and Utilies.
+
+PageObjects--
+
+In pageObjects package I have separated each page as per requirement.Create "BasePage" under "pageobjects" which includes only constructor which is used to initialize the webdriver.This will be invoked by every page object class constructor which is re-usable in future
+
+Create Page object classes for BeCognizant page and News Page (These two classes extends from Base page) and perform some action.
+
+
+Test file--
+Create "Base Class" under testBase package and copy resuable method 
+Create two test cases TC_001_BeCognizantPage and TC_002_NewsPage under "testCases" which extends Base class
+
+And these two testcases class are combined together into one "testing.xml" file to run test cases 
+
+Utility File --
+
+1.ExcelUtility file :
+Create ExcelUtility class under utilities package.Create DataProviders class in utilities package to maintain data providers for data driven tests.
+
+2.ExtentReports to project:
+Create ExtentReportManager utility  class under utilities package.Add @Listener to all test cases.
+
+3.Screenshot:
+I have created screenshot separately in utility file thats why it is resuable in every test methods.
+
+
+Config.Properties file--
+I have added config.properties file under scr/test/resource and load this load config.properties file in "base class" using File Header File and I have written appURL ,username,password etc..
+
+
+
+
+
+//Code Explanation//
+
+Page object model is a pattern how we can manage test case how mange webelement in framework
+is a way of organising web element
+
+
+--PageObjects--
+
+Base Page:
+This page is used to initialize the webdriver and create one BasePage Constructor and use "this" keyword representing the classes. I am using PageFactory.initElements to initialize driver.
+
+initElements is a static method in Page Factory class.
+Page Factory allows for more concise and reusable Page Objects
+
+This is the parents class of all classes
+
+BeCognizant Page:
+
+At first I am creating a constructor of BeCognizant class and using "super" keyword to invoke parents class "driver"
+
+then find each element as per requirement and performing some action.
+
+At first navigating the website using base class and then capture user information.
+Taking the element of click user information and also taking xpath of username and email id and then creating method of each element for performing action.
+
+News Page:
+
+At first I am creating a constructor of BeCognizant class and using "super" keyword to invoke parents class "driver"
+
+Taking xpath of eachnews ,news header and heading details , associate details ,hyperlink,sharebtn,share options, likes and views
+
+In clickEachNews Methods I am taking news no as a variable and click option is performed and i am taking the news heading and putting into Excel file thats why i am using ExcelUtils classes.
+xFile is used to represent the location of excel file where it will be stored
+
+then I am using for loop to iterate each and every news pages and then using setCellData method it can be stored liked that.
+
+Then I am creating showNewsDetails() method for doing actions of txt_heading.
+
+Actions class is used for mouse opetations as per requirements hover the associate details thats why i am using actions.moveToElement and perform the action.
+
+then validation of hyperlink of iterate for each loop and taking href as a string format and checking conditions if url is working or not
+
+Then click the share btn and display the share options.
+
+and then using javascript executor for scrolling this page and print no of likes and views 
+
+
+I am using beCognizant.click() because some of the time duw to website proble it will not get back so it will show exception.
+
+thats why it will go to each news by clicking beCognizant.click().
+
+I am taking newSize() method to take size of newspage.
+
+
+Testing File ----
+Base class :
+I am using this class for fetching the website using config.properties 
+In config.properties I am using File reader for directory of config.properties and load the properties file.
+
+then i am chossing browsers for multiple browser testing using switch cases.then quit the browser
+	
+
+
+TC_001_BeCognizantPage class :
+It is used to check the validation of each method which has already used in becognizant pageobjects and capture user information.
+
+TC_002_NewsPage class:
+
+
+It is used to check the validation of each method which has already used in 
+news page and capture news page.
+
+----Utility File---
+
+ExtentReport:
+I am taking ExtentReportManager which is ectend from baseclass but it implements ITListener interface which is inbuilt in testNG for generating report automatically.
+
+please check code for details.
+
+ExcelUtils: 
+It is basically used to generate data in excel file .it is a concept of data driven testing for automating  excel
+Excel File-->Workbook-->sheets-->rows-->columns
+
+FileInputStream --read data       
+FileOutputStream --writing data
+
+
+XSSFWorkbook
+XSSFSheet
+XSSFRow
+XSSFCell
+
+
+how to read the data:
+current data location :
+System.getProperty("user.dir")+"\\testdata\data.xlsx"
+
+
+
+
+
+ 
+
+
+

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+        <bean id="dateFormat" class="java.text.SimpleDateFormat">
+	        <constructor-arg value="yyyy-MM-dd" />
+	    </bean>
+ 
+        <bean id="employee" class="com.cognizant.springlearn.bean.Employee">
+        <property name="id" value="101"/>
+        <property name="name" value="John Doe"/>
+        <property name="salary" value="75000.0"/>
+        <property name="permanent" value="true"/>
+        
+         <property name="dateOfBirth">
+            <bean factory-bean="dateFormat" factory-method="parse">
+                <constructor-arg value="2010-01-31" />
+            </bean>
+        </property> 
+        
+    </bean>
+        
+   
+    
+    
+ 
+</beans>

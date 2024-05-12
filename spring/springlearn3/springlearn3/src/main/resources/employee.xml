@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+ <bean id="skillHistory" class="com.cognizant.springlearn.bean.springlearn3.Skill">
+    <property name="id" value="10"/>
+    <property name="name" value="History"/>
+	</bean>
+<bean id="skillGeography" class="com.cognizant.springlearn.bean.springlearn3.Skill">
+	    <property name="id" value="20"/>
+	    <property name="name" value="Geography"/>
+	</bean>
+	
+	<bean id="skillEcomics" class="com.cognizant.springlearn.bean.springlearn3.Skill">
+	    <property name="id" value="3"/>
+	    <property name="name" value="Economics"/>
+	</bean>
+	
+	
+	<bean id="employeeSkill" class="com.cognizant.springlearn.bean.springlearn3.Employee">
+	  
+	    <property name="skills">
+	        <array>
+	            <ref bean="skillHistory" />
+	            <ref bean="skillGeography" />
+	            <ref bean="skillEcomics" />
+	        </array>
+	    </property>
+	</bean>
+</beans>
